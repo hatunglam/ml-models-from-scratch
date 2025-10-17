@@ -37,4 +37,12 @@ class NaiveBayes:
             posteriors.append(posterior)
 
         # return classes with the highest posterior
+        return self._classes[np.argmax(posteriors)]
+    
+    def _pdf(self, cls_idx, x):
+        mean = self._mean[cls_idx]
+        var= self._var[cls_idx]
+        numerator = np.exp(-((x - mean)**2)/(2 * var)) 
+        denominator = np.sqrt(2 * np.pi * var)
+        return numerator / denominator
 
